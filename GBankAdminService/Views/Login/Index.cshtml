@@ -2,9 +2,7 @@
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <!doctype html>
 
@@ -13,30 +11,53 @@
     <meta charset="utf-8">
 
     <title>Admin Login Page - GBank</title>
-       
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 </head>
-
 <body>
-    <div id="login-div">
-        @using (Html.BeginForm("TryToLogin","Login", FormMethod.Post))
-        {
-            <table>
-                <tr>
-                    <td></td>
-                    <td>App Name</td>
-                </tr>
-                <tr>
-                    <td>@Html.LabelFor(a => a.username)</td>
-                    <td>@Html.EditorFor(a => a.username)</td>
-                    <td>@Html.LabelFor(model => model.password)</td>
-                    <td>@Html.PasswordFor(model => model.password)</td>
+    <div class="container">
+        <form method="post" asp-action="TryToLogin" asp-controller="Login">
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+                <label class="form-label" asp-for="username">Username</label>
+                <input asp-for="username" placeholder="Type your username" class="form-control" />
 
-                    <td><input type="submit" value="Log in" /> </td>
+            </div>
 
-                </tr>
-            </table>
-        }
+            <!-- Password input -->
+            <div class="form-outline mb-4">
+                <label class="form-label" asp-for="password">Password</label>
+                <input asp-for="password" type="password" placeholder="Type password" class="form-control" />
+
+            </div>
+
+            <!-- 2 column grid layout for inline styling -->
+            <div class="row mb-4">
+                <div class="col d-flex justify-content-center">
+                    <!-- Checkbox -->
+                    <div class="form-check">
+                        <input class="form-check-input"
+                               type="checkbox"
+                               value=""
+                               id="form1Example3"
+                               checked />
+                        <label class="form-check-label" for="form1Example3"> Remember me </label>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <!-- Simple link -->
+                    <a href="#!">Forgot password?</a>
+                </div>
+            </div>
+
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+        </form>
     </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 </body>
 </html>

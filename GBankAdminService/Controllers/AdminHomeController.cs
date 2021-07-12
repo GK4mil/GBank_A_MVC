@@ -11,7 +11,7 @@ namespace GBankAdminService.Controllers
 {
     public class AdminHomeController : Controller
     {
-        [Authorize(Roles = "superadmin,Admin")]
+        //[Authorize(Roles = "superadmin,Admin")]
         public IActionResult Index()
         {
             return View();
