@@ -1,0 +1,65 @@
+﻿@model IEnumerable<GBankAdminService.Domain.Entities.User>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Search client</h1>
+
+<form method="get" asp-action="Search">
+    <div class="form-group">
+        <label>Type username, firstname oraz lastname </label>
+        <input type="text" placeholder="search phase" name="q" />
+        <input hidden name="billid" value="@ViewData["billid"]" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </div>
+</form>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Username)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.firstname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.lastname)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Username)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.firstname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.lastname)
+                </td>
+                <td>
+                    @{
+                        var parms = new Dictionary<string, string>
+                {
+                { "billid", ViewData["billid"].ToString() },
+                { "clientid" , item.ID.ToString() }
+            };
+                    }
+                    <a asp-controller="Bills" asp-action="Assign" asp-all-route-data="parms">Assign</a> |
+                    <a asp-controller="Clients" asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

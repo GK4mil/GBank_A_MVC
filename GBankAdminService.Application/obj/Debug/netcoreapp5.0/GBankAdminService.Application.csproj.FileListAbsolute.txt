@@ -1,0 +1,15 @@
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Application\bin\Debug\netcoreapp5.0\GBankAdminService.Application.deps.json
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Application\bin\Debug\netcoreapp5.0\GBankAdminService.Application.dll
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Application\bin\Debug\netcoreapp5.0\ref\GBankAdminService.Application.dll
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Application\bin\Debug\netcoreapp5.0\GBankAdminService.Application.pdb
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Application\obj\Debug\netcoreapp5.0\GBankAdminService.Application.csprojAssemblyReference.cache
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Application\obj\Debug\netcoreapp5.0\GBankAdminService.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Application\obj\Debug\netcoreapp5.0\GBankAdminService.Application.AssemblyInfoInputs.cache
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Application\obj\Debug\netcoreapp5.0\GBankAdminService.Application.AssemblyInfo.cs
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Application\obj\Debug\netcoreapp5.0\GBankAdminService.Application.csproj.CoreCompileInputs.cache
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Application\obj\Debug\netcoreapp5.0\GBankAdminService.Application.dll
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Application\obj\Debug\netcoreapp5.0\ref\GBankAdminService.Application.dll
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Application\obj\Debug\netcoreapp5.0\GBankAdminService.Application.pdb
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Application\bin\Debug\netcoreapp5.0\GBankAdminService.Domain.dll
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Application\bin\Debug\netcoreapp5.0\GBankAdminService.Domain.pdb
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Application\obj\Debug\netcoreapp5.0\GBankAdminService.Application.csproj.CopyComplete

@@ -1,0 +1,42 @@
+﻿@model GBankAdminService.Models.CredentialsModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>Admin Login Page - GBank</title>
+       
+</head>
+
+<body>
+    <div id="login-div">
+        @using (Html.BeginForm("TryToLogin","Login", FormMethod.Post))
+        {
+            <table>
+                <tr>
+                    <td></td>
+                    <td>App Name</td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(a => a.username)</td>
+                    <td>@Html.EditorFor(a => a.username)</td>
+                    <td>@Html.LabelFor(model => model.password)</td>
+                    <td>@Html.PasswordFor(model => model.password)</td>
+
+                    <td><input type="submit" value="Log in" /> </td>
+
+                </tr>
+            </table>
+        }
+    </div>
+
+</body>
+</html>

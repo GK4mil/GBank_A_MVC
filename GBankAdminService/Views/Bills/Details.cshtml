@@ -1,0 +1,74 @@
+﻿@model GBankAdminService.Domain.Entities.Bill
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Bill</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.balance)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.balance)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.billNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.billNumber)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+@{ 
+    var parms = new Dictionary<String, String>
+    { { "q", "" },
+        {"billid",@Model.ID.ToString() }
+    };
+}
+<div> <h4>Clients assigned to bill </h4></div>
+<div> <h4><a asp-controller="Clients" asp-action="Search" asp-all-route-data="parms">Assign client to bill</a> </h4></div>
+<div>
+    <h4>Users</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Firstname
+                </th>
+                <th>
+                    Lastname
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Users)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.firstname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.lastname)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-controller="Clients" asp-route-id="@item.ID">Edit</a> |
+                        <a asp-action="Details" asp-controller="Clients" asp-route-id="@item.ID">Details</a> |
+                        <a asp-action="Delete" asp-controller="Clients" asp-route-id="@item.ID">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

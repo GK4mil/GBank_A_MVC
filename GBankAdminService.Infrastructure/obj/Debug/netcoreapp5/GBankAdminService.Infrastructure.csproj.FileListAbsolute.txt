@@ -1,0 +1,17 @@
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Infrastructure\bin\Debug\netcoreapp5\GBankAdminService.Application.dll
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Infrastructure\bin\Debug\netcoreapp5\GBankAdminService.Domain.dll
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Infrastructure\bin\Debug\netcoreapp5\GBankAdminService.Application.pdb
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Infrastructure\obj\Debug\netcoreapp5\GBankAdminService.Infrastructure.csprojAssemblyReference.cache
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Infrastructure\obj\Debug\netcoreapp5\GBankAdminService.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Infrastructure\obj\Debug\netcoreapp5\GBankAdminService.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Infrastructure\obj\Debug\netcoreapp5\GBankAdminService.Infrastructure.AssemblyInfo.cs
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Infrastructure\bin\Debug\netcoreapp5\GBankAdminService.Infrastructure.deps.json
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Infrastructure\bin\Debug\netcoreapp5\GBankAdminService.Infrastructure.dll
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Infrastructure\bin\Debug\netcoreapp5\ref\GBankAdminService.Infrastructure.dll
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Infrastructure\bin\Debug\netcoreapp5\GBankAdminService.Infrastructure.pdb
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Infrastructure\bin\Debug\netcoreapp5\GBankAdminService.Domain.pdb
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Infrastructure\obj\Debug\netcoreapp5\GBankAdminService.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Infrastructure\obj\Debug\netcoreapp5\GBankAdminService.Infrastructure.csproj.CopyComplete
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Infrastructure\obj\Debug\netcoreapp5\GBankAdminService.Infrastructure.dll
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Infrastructure\obj\Debug\netcoreapp5\ref\GBankAdminService.Infrastructure.dll
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Infrastructure\obj\Debug\netcoreapp5\GBankAdminService.Infrastructure.pdb

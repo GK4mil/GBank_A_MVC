@@ -1,0 +1,9 @@
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Domain\bin\Debug\netcoreapp3.1\GBankAdminService.Domain.deps.json
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Domain\bin\Debug\netcoreapp3.1\GBankAdminService.Domain.dll
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Domain\bin\Debug\netcoreapp3.1\GBankAdminService.Domain.pdb
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Domain\obj\Debug\netcoreapp3.1\GBankAdminService.Domain.csprojAssemblyReference.cache
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Domain\obj\Debug\netcoreapp3.1\GBankAdminService.Domain.AssemblyInfoInputs.cache
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Domain\obj\Debug\netcoreapp3.1\GBankAdminService.Domain.AssemblyInfo.cs
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Domain\obj\Debug\netcoreapp3.1\GBankAdminService.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Domain\obj\Debug\netcoreapp3.1\GBankAdminService.Domain.dll
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService.Domain\obj\Debug\netcoreapp3.1\GBankAdminService.Domain.pdb

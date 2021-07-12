@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "GBankAdminService.Application": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

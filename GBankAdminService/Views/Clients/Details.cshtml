@@ -1,0 +1,89 @@
+﻿@model GBankAdminService.Domain.Entities.User
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.password)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.password)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.firstname)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.firstname)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.lastname)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.lastname)
+        </dd>
+    </dl>
+</div>
+@{
+    var parms = new Dictionary<String, String>
+{ { "q", "" },
+        {"clientid",@Model.ID.ToString() }
+    };
+}
+<div> <h4><a asp-controller="Bills" asp-action="Search" asp-all-route-data="parms">Assign existing bill to client</a> </h4></div>
+<div>
+    <a asp-controller="Bills"
+       asp-action="Create"
+       asp-route-id="@Model.ID">Add new  bill to client</a>
+
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Bill number
+            </th>
+            <th>
+                Balance
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Bills)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.billNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.balance)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-controller="Bills" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-action="Details" asp-controller="Bills" asp-route-id="@item.ID">Details</a> |
+                    <a asp-action="Delete" asp-controller="Bills" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+
