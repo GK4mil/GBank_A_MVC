@@ -25,7 +25,7 @@ namespace GBankAdminService.Controllers
         public async Task<IActionResult> Index()
         {
             //return View(await _ct.Bills.Where(x => x.User.ID > 0).Include(c => c.User).ToListAsync());
-            return View(await _br.GetAllAsync());
+            return View(await _ct.Bills.Where(x=>x.ID>0).Include(u=>u.Users).ToListAsync());
         }
 
         public async Task<IActionResult> Edit(int id)
@@ -120,6 +120,21 @@ namespace GBankAdminService.Controllers
             //var res = await _ct.Bills.Where(x => x.ID == id).Include(c => c.Users).FirstOrDefaultAsync();
             var res = await _br.FindByAnyColumn(q);
             return await Task.Run(() => View(res));
+        }
+
+        [HttpGet]
+        [ActionName("unassign")]
+        public async Task<IActionResult> UnassignBillFromClient(int billid, int clientid)
+        {
+            var res_bill = await _ct.Bills.Where(i => i.ID == billid).Include(u => u.Users).FirstAsync();
+            var res_client = await _ur.GetByIdAsync(clientid);
+
+
+            res_bill.Users.Remove(res_client);
+            await _ct.SaveChangesAsync();
+
+
+            return RedirectToAction("Details", "Clients", new { id = clientid });
         }
 
     }

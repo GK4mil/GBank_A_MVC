@@ -55,17 +55,24 @@
         <tbody>
             @foreach (var item in Model.Users)
             {
-                <tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.firstname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.lastname)
+                </td>
+                @{
+                    var parms1 = new Dictionary<String, String>
+                        { { "billid", Model.ID.ToString() },
+                {"clientid",item.ID.ToString() }
+             };
+                }
                     <td>
-                        @Html.DisplayFor(modelItem => item.firstname)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.lastname)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-controller="Clients" asp-route-id="@item.ID">Edit</a> |
+
                         <a asp-action="Details" asp-controller="Clients" asp-route-id="@item.ID">Details</a> |
                         <a asp-action="Delete" asp-controller="Clients" asp-route-id="@item.ID">Delete</a>
+                        <a asp-action="unassign" asp-controller="Bills" asp-all-route-data="parms1">Unassign from bill</a>
                     </td>
                 </tr>
             }

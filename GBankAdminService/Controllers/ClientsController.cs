@@ -92,5 +92,20 @@ namespace GBankAdminService.Controllers
             return await Task.Run(()=> View(res));
         }
 
+        [HttpGet]
+        [ActionName("unassign")]
+        public async Task<IActionResult> UnassignClientFromBill(int billid, int clientid)
+        {
+            var res_bill = await _ct.Bills.Where(i => i.ID == billid).Include(u => u.Users).FirstAsync();
+            var res_client = await _ur.GetByIdAsync(clientid);
+            
+            
+            res_bill.Users.Remove(res_client);
+            await _ct.SaveChangesAsync();
+            
+
+            return RedirectToAction("Details", "Clients", new { id = clientid });
+        }
+
     }
 }
