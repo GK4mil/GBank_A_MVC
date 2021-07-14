@@ -1,6 +1,7 @@
 ﻿using GBankAdminService.Application.Contracts.Persistence;
 using GBankAdminService.Domain.Entities;
 using GBankAdminService.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,11 @@ namespace GBankAdminService.Infrastructure.Repositories.EF
 
             return await Task.Run(() => _ct.Bills.Where(x => x.balance.ToString().Contains(phase)
             || x.billNumber.Contains(phase)).ToList());
+        }
+
+        public async Task<List<Bill>> FindByBillNumber(String billnr)
+        {
+            return await _dbContext.Bills.Where(x => x.billNumber == billnr).ToListAsync();
         }
     }
 }

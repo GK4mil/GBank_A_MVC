@@ -1,4 +1,5 @@
-﻿using GBankAdminService.Application.Contracts.Persistence;
+﻿using GBankAdminService.Application.Common.Interfaces;
+using GBankAdminService.Application.Contracts.Persistence;
 using GBankAdminService.Domain.Entities;
 using GBankAdminService.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
@@ -15,11 +16,14 @@ namespace GBankAdminService.Controllers
         private readonly GBankDbContext _ct;
         private readonly IUserRepository _ur;
         private readonly IBillRepository _br;
-        public ClientsController(GBankDbContext ct, IUserRepository ur, IBillRepository br)
+        private readonly IPasswordHashService _phs;
+
+        public ClientsController(GBankDbContext ct, IUserRepository ur, IBillRepository br, IPasswordHashService phs)
         {
             _ct = ct;
             _ur = ur;
             _br = br;
+            _phs = phs;
         }
         public async Task<IActionResult> Index()
         {
@@ -37,9 +41,15 @@ namespace GBankAdminService.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(User u)
         {
-            await _ct.Users.AddAsync(u);
-            await _ct.SaveChangesAsync();
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                await _ct.Users.AddAsync(u);
+                await Task.Run(() => { u.password = _phs.Hash(u.password); });
+                await _ct.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            else
+                return View(u);
         }
 
         public async Task<IActionResult> Delete(int id)
@@ -50,19 +60,25 @@ namespace GBankAdminService.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var res = await Task.Run(() => _ct.Users.Where(x => x.ID ==id).ToList().First());
-            res.ID = 2;
+            res.password = default;
             return View(res);
         }
         [HttpPost]
         public async Task<IActionResult> Edit(User u)
         {
+            if (u.password.Length > 0)
+                await Task.Run(() => { u.password = _phs.Hash(u.password); });
+            else
+            {
+                var result = await _ur.GetByIdAsync(u.ID);
+                u.password = result.password;
+            }
             await _ur.UpdateAsync(u);
-            return View();
+            return RedirectToAction("Details", "Clients", new { id = u.ID });
         }
 
         public async Task<IActionResult> Details(int id)
         {
-            
             return View(await _ct.Users.Where(x => x.ID == id).Include(c => c.Bills).FirstAsync());
         }
         [HttpGet]

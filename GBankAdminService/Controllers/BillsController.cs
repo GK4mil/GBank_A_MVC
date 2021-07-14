@@ -1,6 +1,8 @@
 ﻿using GBankAdminService.Application.Contracts.Persistence;
+using GBankAdminService.Application.Functions.Bills.Command;
 using GBankAdminService.Domain.Entities;
 using GBankAdminService.Infrastructure.Persistence;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -14,13 +16,15 @@ namespace GBankAdminService.Controllers
     {
         private readonly IBillRepository _br;
         private readonly IUserRepository _ur;
+        private readonly IMediator _m;
         private readonly GBankDbContext _ct;
 
-        public BillsController(IBillRepository br, GBankDbContext ct, IUserRepository ur)
+        public BillsController(IBillRepository br, GBankDbContext ct, IUserRepository ur, IMediator m)
         {
             _br = br;
             _ct = ct;
             _ur = ur;
+            _m = m;
         }
         public async Task<IActionResult> Index()
         {
@@ -58,7 +62,9 @@ namespace GBankAdminService.Controllers
         public async Task<IActionResult> Create(Bill b, int id)
         {
             b.ID = default;
-            int billid = (await _br.AddAsync(b)).ID;
+            b = await _m.Send(new AddBillCommand() { balance = b.balance.ToString() });
+            int billid = b.ID;
+
             if (id == 0)
             {       
                 return await Task.Run(() => RedirectToAction("Details", "Bills", new { id = billid }));
@@ -67,7 +73,7 @@ namespace GBankAdminService.Controllers
             {
                 var user = await _ur.GetByIdAsync(id);
                 user.Bills.Add(b);
-                await  _ct.SaveChangesAsync();
+                await _ct.SaveChangesAsync();
                 return await Task.Run(() => RedirectToAction("Details", "Clients", new { id = id }));
             }
         }
@@ -78,13 +84,7 @@ namespace GBankAdminService.Controllers
             var res = await _ct.Bills.Where(x => x.ID == id).Include(c => c.Users).FirstOrDefaultAsync();
             return View(res);
         }
-
-        /*public async Task<IActionResult> Search(int id)
-        {
-            //return View(await _ct.Bills.Where(x => x.User.ID > 0).Include(c => c.User).ToListAsync());
-            var res = await _ct.Bills.Where(x => x.ID == id).Include(c => c.Users).FirstOrDefaultAsync();
-            return View(res);
-        }*/
+       
         [HttpGet]
         [ActionName("assign")]
         public async Task<IActionResult> AssignClientToBill(int billid, int clientid)

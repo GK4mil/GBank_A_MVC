@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Common\Interfaces\" />
     <Folder Include="Common\Models\" />
+    <Folder Include="Functions\Bills\Query\" />
     <Folder Include="Functions\Login\Command\" />
   </ItemGroup>
 

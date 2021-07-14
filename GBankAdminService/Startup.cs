@@ -13,6 +13,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Reflection;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using GBankAdminService.Application.Common.Interfaces;
+using GBankAdminService.Infrastructure.Services;
 
 namespace GBankAdminService
 {
@@ -33,6 +35,9 @@ namespace GBankAdminService
             services.AddControllersWithViews();
             services.AddGBankPersistenceEFServices(Configuration);
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddSingleton<IPasswordHashService, PasswordHashService>();
+
+
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromSeconds(10);
