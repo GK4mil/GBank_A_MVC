@@ -134,7 +134,7 @@ namespace GBankAdminService.Controllers
             await _ct.SaveChangesAsync();
 
 
-            return RedirectToAction("Details", "Clients", new { id = clientid });
+            return RedirectToAction("Details", "Bills", new { id = billid });
         }
 
     }

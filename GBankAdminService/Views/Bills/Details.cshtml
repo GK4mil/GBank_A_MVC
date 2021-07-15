@@ -29,9 +29,9 @@
     <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
-@{ 
+@{
     var parms = new Dictionary<String, String>
-    { { "q", "" },
+{ { "q", "" },
         {"billid",@Model.ID.ToString() }
     };
 }
@@ -48,6 +48,9 @@
                 <th>
                     Lastname
                 </th>
+                <th>
+                    Username
+                </th>
 
                 <th></th>
             </tr>
@@ -62,20 +65,62 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.lastname)
                 </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Username)
+                </td>
                 @{
                     var parms1 = new Dictionary<String, String>
-                        { { "billid", Model.ID.ToString() },
+                                    { { "billid", Model.ID.ToString() },
                 {"clientid",item.ID.ToString() }
              };
                 }
-                    <td>
+                <td>
 
-                        <a asp-action="Details" asp-controller="Clients" asp-route-id="@item.ID">Details</a> |
-                        <a asp-action="Delete" asp-controller="Clients" asp-route-id="@item.ID">Delete</a>
-                        <a asp-action="unassign" asp-controller="Bills" asp-all-route-data="parms1">Unassign from bill</a>
-                    </td>
-                </tr>
+                    <a asp-action="Details" asp-controller="Clients" asp-route-id="@item.ID">Details</a> |
+                    <button type="button" username="@item.Username.ToString()" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal" id=@item.ID onClick="clicked_button(this)"><span class="glyphicon glyphicon-trash" style="vertical-align:middle;margin-top: -5px"></span> Unassign from bill</button>
+                </td>
+            </tr>
             }
         </tbody>
     </table>
 </div>
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" style="margin-left:1px">Confirm Delete</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to unassign Client: <b id="InvoiceID"></b> from bill?</p>
+            </div>
+            <div class="modal-footer">
+
+                <form asp-controller="Bills" asp-action="unassign" method="get" class="form-inline" role="form">
+                    <input type="hidden" id="deleterid" class="deleter_input" name="clientid">
+                    <input type="hidden" value="@Model.ID.ToString()" name="billid">
+                    <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash" style="vertical-align:middle;margin-top: -5px"></span> Delete</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+
+    <script>
+        var deleterinput = document.getElementById("deleterid");
+        var modal_text = document.getElementById("InvoiceID");
+
+
+        function clicked_button(clicked) {
+            deleterinput.value = clicked.id;
+            modal_text.innerHTML = clicked.getAttribute("username");
+        }
+    </script>
+
+}
