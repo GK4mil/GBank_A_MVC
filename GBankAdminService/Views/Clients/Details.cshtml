@@ -5,6 +5,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@if (TempData["WarningMessage"] != null)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Warning!!! </strong> @TempData["WarningMessageContent"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+
 <h1>Details</h1>
 
 <div>
@@ -67,10 +78,10 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.balance)
                 </td>
-                
+
                 <td>
                     <a asp-action="Details" asp-controller="Bills" asp-route-id="@item.ID">Details</a> |
-                  
+
                     <button type="button" billnumber="@item.billNumber.ToString()" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal" id=@item.ID onClick="clicked_button(this)"><span class="glyphicon glyphicon-trash" style="vertical-align:middle;margin-top: -5px"></span> Unassign from bill</button>
                 </td>
             </tr>

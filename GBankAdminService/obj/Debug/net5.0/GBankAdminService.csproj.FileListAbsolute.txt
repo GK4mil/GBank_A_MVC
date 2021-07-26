@@ -163,3 +163,5 @@ C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService\obj\Debug\net5.0
 C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService\obj\Debug\net5.0\Razor\Views\Clients\Search.cshtml.g.cs
 C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService\obj\Debug\net5.0\Razor\Views\Bills\Search.cshtml.g.cs
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService\obj\Debug\net5.0\Razor\Views\Error\Error.cshtml.g.cs
+C:\Users\Kamil\source\repos\GBankAdminService\GBankAdminService\obj\Debug\net5.0\Razor\Views\Error\Index.cshtml.g.cs

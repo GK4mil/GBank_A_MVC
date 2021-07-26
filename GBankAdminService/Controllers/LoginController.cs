@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GBankAdminService.Controllers
 {
@@ -28,9 +29,15 @@ namespace GBankAdminService.Controllers
         }
         public IActionResult Index()
         {
+            byte[] islogged;
+            if(HttpContext.Session.TryGetValue("is_logged",out islogged))
+                return RedirectToAction("Index", "AdminHome");
+
             return View("Index");
         }
-        
+
+
+        [Authorize(Roles = "superadmin,Admin")]
         [HttpPost]
         public async Task<IActionResult> TryToLoginAsync(GBankAdminService.Models.CredentialsModel model)
         {
@@ -48,10 +55,14 @@ namespace GBankAdminService.Controllers
 
                 var principal = new ClaimsPrincipal(identity);
 
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-                
-                
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, new AuthenticationProperties
+                {
+                    IsPersistent = true,
+                    ExpiresUtc = DateTime.UtcNow.AddMinutes(5)
+                });
 
+
+                HttpContext.Session.SetString("is_logged", "true");
 
                 return RedirectToAction("Index","AdminHome");
             }
@@ -62,6 +73,9 @@ namespace GBankAdminService.Controllers
             }
             
         }
+
+
+        [Authorize(Roles = "superadmin,Admin")]
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync();

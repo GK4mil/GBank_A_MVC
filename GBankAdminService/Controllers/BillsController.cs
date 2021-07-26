@@ -3,6 +3,7 @@ using GBankAdminService.Application.Functions.Bills.Command;
 using GBankAdminService.Domain.Entities;
 using GBankAdminService.Infrastructure.Persistence;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace GBankAdminService.Controllers
 {
+    //[Authorize(Roles = "superadmin,Admin")]
     public class BillsController : Controller
     {
         private readonly IBillRepository _br;
@@ -78,26 +80,18 @@ namespace GBankAdminService.Controllers
             }
         }
 
+
+        [TempData]
+        public string WarningMessage { get; set; }
+
+
         public async Task<IActionResult> Details(int id)
         {
-            //return View(await _ct.Bills.Where(x => x.User.ID > 0).Include(c => c.User).ToListAsync());
             var res = await _ct.Bills.Where(x => x.ID == id).Include(c => c.Users).FirstOrDefaultAsync();
             return View(res);
         }
        
-        [HttpGet]
-        [ActionName("assign")]
-        public async Task<IActionResult> AssignClientToBill(int billid, int clientid)
-        {
-            var res_bill = await _br.GetByIdAsync(billid);
-            var res_client = await _ur.GetByIdAsync(clientid);
-
-            res_bill.Users.Add(res_client);
-            await _ct.SaveChangesAsync();
-            //return View(await _ct.Bills.Where(x => x.User.ID > 0).Include(c => c.User).ToListAsync());
-            
-            return RedirectToAction("Details","Bills", new { id=billid});
-        }
+        
 
 
         [HttpGet]
@@ -120,6 +114,29 @@ namespace GBankAdminService.Controllers
             //var res = await _ct.Bills.Where(x => x.ID == id).Include(c => c.Users).FirstOrDefaultAsync();
             var res = await _br.FindByAnyColumn(q);
             return await Task.Run(() => View(res));
+        }
+
+        [HttpGet]
+        [ActionName("assign")]
+        public async Task<IActionResult> AssignClientToBill(int billid, int clientid)
+        {
+            var res_bill = await _br.GetByIdAsync(billid);
+            var res_client = await _ur.GetByIdAsync(clientid);
+
+            bool ifexists = (await _ct.Bills.Where(x => x.ID == billid).Include(u => u.Users).FirstOrDefaultAsync()).Users.Where(u => u.ID == clientid).ToList().Count == 1 ? true: false ;
+
+            if (ifexists)
+            {
+                TempData["WarningMessage"] = true.ToString();
+                TempData["WarningMessageContent"] = "This association already exists!";
+                return RedirectToAction("Details", "Bills", new { id = billid });
+            }
+   
+            res_bill.Users.Add(res_client);
+            await _ct.SaveChangesAsync();
+            //return View(await _ct.Bills.Where(x => x.User.ID > 0).Include(c => c.User).ToListAsync());
+
+            return RedirectToAction("Details", "Bills", new { id = billid });
         }
 
         [HttpGet]

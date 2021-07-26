@@ -9,9 +9,10 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace GBankAdminService.Controllers
 {
+    [Authorize(Roles = "superadmin,Admin")]
     public class AdminHomeController : Controller
     {
-        //[Authorize(Roles = "superadmin,Admin")]
+        
         public IActionResult Index()
         {
             return View();

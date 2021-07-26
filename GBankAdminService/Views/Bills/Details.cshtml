@@ -4,12 +4,21 @@
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@if  (TempData["WarningMessage"] != null)
+{
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Warning!!! </strong> @TempData["WarningMessageContent"]
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+}
 
-<h1>Details</h1>
+<div class="jumbotron">
+    <h1>Bill details</h1>
+</div>
 
 <div>
-    <h4>Bill</h4>
-    <hr />
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.balance)
@@ -35,8 +44,12 @@
         {"billid",@Model.ID.ToString() }
     };
 }
-<div> <h4>Clients assigned to bill </h4></div>
-<div> <h4><a asp-controller="Clients" asp-action="Search" asp-all-route-data="parms">Assign client to bill</a> </h4></div>
+
+<div class="jumbotron">
+    <h1>Clients assigned to bill</h1>
+</div>
+
+<div> <a class="btn btn-primary btn-lg active" role="button" aria-pressed="true" asp-controller="Clients" asp-action="Search" asp-all-route-data="parms">Assign client to bill</a> </div>
 <div>
     <h4>Users</h4>
     <table class="table">
@@ -58,28 +71,28 @@
         <tbody>
             @foreach (var item in Model.Users)
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.firstname)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.lastname)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Username)
-                </td>
-                @{
-                    var parms1 = new Dictionary<String, String>
-                                    { { "billid", Model.ID.ToString() },
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.firstname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.lastname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Username)
+                    </td>
+                    @{
+                        var parms1 = new Dictionary<String, String>
+                                            { { "billid", Model.ID.ToString() },
                 {"clientid",item.ID.ToString() }
              };
-                }
-                <td>
+                    }
+                    <td>
 
-                    <a asp-action="Details" asp-controller="Clients" asp-route-id="@item.ID">Details</a> |
-                    <button type="button" username="@item.Username.ToString()" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal" id=@item.ID onClick="clicked_button(this)"><span class="glyphicon glyphicon-trash" style="vertical-align:middle;margin-top: -5px"></span> Unassign from bill</button>
-                </td>
-            </tr>
+                        <a asp-action="Details" asp-controller="Clients" asp-route-id="@item.ID">Details</a> |
+                        <button type="button" username="@item.Username.ToString()" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal" id=@item.ID onClick="clicked_button(this)"><span class="glyphicon glyphicon-trash" style="vertical-align:middle;margin-top: -5px"></span> Unassign from bill</button>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>

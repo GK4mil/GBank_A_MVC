@@ -5,6 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+
+
+
 <h1>Search bill</h1>
 
 <form method="get" asp-action="Search">
@@ -29,11 +33,11 @@
             <th>
                 @Html.DisplayNameFor(model => model.billNumber)
             </th>
-            
+
             <th></th>
         </tr>
     </thead>
-    
+
     <tbody>
         @foreach (var item in Model)
         {
@@ -44,11 +48,11 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.billNumber)
                 </td>
-                
+
                 <td>
                     @{
                         var parms = new Dictionary<string, string>
-                {
+                        {
                 { "clientid", ViewData["clientid"].ToString() },
                 { "billid" , item.ID.ToString() }
             };
