@@ -4,6 +4,7 @@
     <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>867496de-8828-4a3b-ada7-b71bfdd35469</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <SignAssembly>true</SignAssembly>
   </PropertyGroup>
 
   <ItemGroup>

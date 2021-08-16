@@ -20,11 +20,11 @@ namespace GBankAdminService.Domain.Entities
         public string password { get; set; }
         public string firstname { get; set; }
         public string lastname { get; set; }
+        public bool active { get; set; }
 
-        
-       
 
-       
+
+
         public virtual ICollection<Bill> Bills { get; set; }
 
 

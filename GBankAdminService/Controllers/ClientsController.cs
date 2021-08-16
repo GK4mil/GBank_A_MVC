@@ -61,6 +61,7 @@ namespace GBankAdminService.Controllers
         }
         public async Task<IActionResult> Edit(int id)
         {
+            
             var res = await Task.Run(() => _ct.Users.Where(x => x.ID ==id).ToList().First());
             res.password = default;
             return View(res);
@@ -68,14 +69,18 @@ namespace GBankAdminService.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(User u)
         {
-            if (u.password.Length > 0)
-                await Task.Run(() => { u.password = _phs.Hash(u.password); });
+            var result = await _ur.GetByIdAsync(u.ID);
+
+            if (u.password!=null)
+                await Task.Run(() => { result.password = _phs.Hash(u.password); });
             else
             {
-                var result = await _ur.GetByIdAsync(u.ID);
-                u.password = result.password;
+                
+                result.firstname = u.firstname;
+                result.lastname = u.lastname;
+                result.active = u.active;
             }
-            await _ur.UpdateAsync(u);
+            await _ur.UpdateAsync(result);
             return RedirectToAction("Details", "Clients", new { id = u.ID });
         }
 

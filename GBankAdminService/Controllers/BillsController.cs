@@ -48,9 +48,9 @@ namespace GBankAdminService.Controllers
             res.balance = b.balance;
             await _ct.SaveChangesAsync();
 
-            
-            
-            return RedirectToAction("Index");
+
+
+            return RedirectToAction("Details", "Bills", new { id = id });
         }
 
         [HttpGet]
